@@ -20,7 +20,7 @@ exports.downloadPdf = async (req, res, next) => {
     try {
       const pdfId = req.params.pdfId;
       const pdf = await Pdf.findById(pdfId);
-  
+
       if (!pdf) {
         return res.status(404).json({ message: 'PDF not found' });
       }
@@ -61,7 +61,7 @@ exports.downloadPdf = async (req, res, next) => {
         // Notify clients about the completion of the download
         wss.clients.forEach((client) => {
           if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify({ type: 'download-complete', pdfId }));
+            client.send(JSON.stringify({ type: 'test-message',content: 'This is a test message.', pdfId }));
           }
         });
       });
